@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 EXPOSE 8080
 RUN apt-get update
 RUN apt-get -y install default-jdk tomcat8 maven
-RUN apt-get -y install docker.io
+RUN apt-get -y install git
 RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git /home/box
 RUN cd /home/box
 RUN mvn package
