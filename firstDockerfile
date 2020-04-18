@@ -1,8 +1,12 @@
 FROM ubuntu:16.04
 EXPOSE 8080
-RUN apt update && apt install -y default-jdk tomcat8 maven && \
-  apt install docker.io && git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git && \
-  cd boxfuse-sample-java-war-hello && mvn package && mv target/hello-1.0.war /var/lib/tomcat8/webapps/
+RUN apt update
+RUN apt install -y default-jdk tomcat8 maven
+RUN apt install docker.io
+RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+RUN cd boxfuse-sample-java-war-hello
+RUN mvn package
+RUN mv target/hello-1.0.war /var/lib/tomcat8/webapps/
 ENV CATALINA_BASE /var/lib/tomcat8/
 
 CMD ["usr/share/tomcat8/bin.catalins.sh", "run"]
