@@ -1,5 +1,5 @@
 ---
-- name: Install nginx and upload 
+- name: Install nginx and upload
   hosts: db1
   become: yes
 
@@ -12,7 +12,7 @@
             apt: name=nginx state=present
 
           - name: Copy html
-            copy: src={{ source_file}} dest={{ destin_file}} 
+            copy: src={{ source_file}} dest={{ destin_file}}
             notify: Restart nginx
 
           - name: Start nginx
@@ -22,4 +22,9 @@
           - name: Restart nginx
             service: name=nginx state=restarted
 
-...            
+- name: Install tree
+  become: yes
+  tasks:
+    - name: install
+      apt: name=tree state=present
+...
