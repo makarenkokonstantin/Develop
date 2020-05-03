@@ -1,0 +1,16 @@
+---
+- name: My Super Puper Playbook for Variables
+  hosts: all
+  become: yes
+
+  vars:
+    messange1: Privet
+    messange2: World
+    secrret: fsdfksdfa
+
+  tasks:
+
+    - name: Print Secret Varibale
+      debug:
+        var: secret
+
