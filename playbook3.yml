@@ -1,0 +1,23 @@
+---
+- name: Install nginx and upload 
+  hosts: db1
+  become: yes
+
+  vars:
+          source_file: ./index.html
+          destin_file: /var/www/html
+
+  tasks:
+          - name: Install Nginx server
+            apt: name=nginx state=present
+
+          - name: Copy html
+            copy: src={{ source_file}} dest={{ destin_file}} 
+            notify: Restart nginx
+
+          - name: Start nginx
+            service: name=nginx state=started enabled=yes
+
+  handlers:
+          - name: Restart nginx
+            service: name:nginx state:restarted
