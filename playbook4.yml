@@ -6,11 +6,36 @@
   vars:
     messange1: Privet
     messange2: World
-    secrret: fsdfksdfa
+    secret: fsdfksdfa
 
   tasks:
 
     - name: Print Secret Varibale
       debug:
         var: secret
+
+    - debug:
+        msg: "Top secret word: {{ secret }}"
+
+    - debug:
+            msg: "Owner this Server -->{{ owner }}<--"     
+
+    - set_fact: 
+            full_message: "{{ messange1 }} {{ messange2 }} from {{ owner }}" 
+
+    - debug:
+            var: full_message
+            verbosity: 2
+
+
+    - debug:
+            var: ansible_distribution
+
+    - shell: uptime
+      register: result
+
+    - debug:
+            var: result.stdout
+
+
 
