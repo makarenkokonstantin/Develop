@@ -1,0 +1,37 @@
+---
+# tasks file for deploy_nginx
+#
+- name: Check ver Linux
+  debug:
+    var: ansible_nodename
+
+- block:
+
+  - name: Install Nginx server for db1
+    apt: name=nginx state=present 
+
+
+  - name: Start nginx
+    service: name=nginx state=started enabled=yes
+
+    when: ansible_nodename == "ip-172-31-26-122"
+
+- block:
+
+  - name: Install Apache for db2
+    apt: name=apache2 state=present
+
+  - name: Start Apache
+    service: name=apache2 state=started enabled=yes
+
+    when: ansible_nodename == "ip-172-31-25-161"
+
+- name: Copy html
+  copy: src={{ item }} dest={{ destin_folder }}/{{ item }}
+  loop:
+       - "index.html"
+       - "test.txt"
+  notify:
+       - Restart nginx
+       - Restart Apache
+

@@ -1,0 +1,12 @@
+---
+# handlers file for deploy_nginx
+
+          - name: Restart nginx
+            service: name=nginx state=restarted
+            when: ansible_nodename == "ip-172-31-26-122"
+
+
+          - name: Restart Apache
+            service: name=apache2 state=restarted
+            when: ansible_nodename == "ip-172-31-25-161"
+           
